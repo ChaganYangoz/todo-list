@@ -1,0 +1,1 @@
+(()=>{const e=document.querySelector("#container"),t=document.createElement("div");t.setAttribute("id","leftbar"),e.appendChild(t)})();

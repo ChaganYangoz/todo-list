@@ -16,7 +16,15 @@
     <form onsubmit="return false;" method="get" id="form1">
         <input type="text" name="" id="title" placeholder="Title" required>
         <input type="text" id="desc" placeholder="Details" required>
-        <input type="date">
+        <input type="date" id="date">
+        <div>
+        <div>Priority</div>
+        <input type="radio" name="radio" id="rad1" value="low">
+        <label for="rad1">Low</label>
+        <input type="radio" name="radio" id="rad2" value="med">
+        <label for="rad2">Medium</label>
+        <input type="radio" name="radio" id="rad3" value="high">
+        <label for="rad3">High</label></div>
     </form>
       <button id="submit" form="form1">Submit</button>
   </div>

@@ -35,7 +35,9 @@ function sendForm() {
   for (let i = 0; i < ele.length; i++) {
     if (ele[i].checked){
       let mrg=new MergeToDo(title,desc,date,ele[i].value);
-    ele[i].checked=false;}
+      mrg.display();
+      ele[i].checked=false;
+    }
   }
 
   document.querySelector("#title").value = "";
@@ -78,5 +80,28 @@ class MergeToDo {
     this.desc = desc;
     this.date = date;
     this.pri = pri;
+  }
+
+  display(){
+      const box=document.createElement('div');
+
+      const titlebox=document.createElement('div');
+      const descbox=document.createElement('div');
+      const dateebox=document.createElement('div');
+      const colorbox=document.createElement('div');
+      colorbox.setAttribute('class','colorbox');
+      if(this.pri=='low'){
+        colorbox.style.backgroundColor='green';
+      }else if(this.pri=="med"){
+        colorbox.style.backgroundColor='yellow';
+      }else if(this.pri=='high'){
+        colorbox.style.backgroundColor="red";
+      }
+      box.setAttribute('class','todoBox');
+      
+      titlebox.textContent=this.title;
+      box.appendChild(colorbox);
+      box.appendChild(titlebox);
+      todoBar.appendChild(box);
   }
 }

@@ -89,10 +89,22 @@ form {
   width: 1200px;
   height: 20px;
   border: 1px solid black;
-  display: flex;
+  display: grid;
+  grid-template-columns: 20px 1fr 50px 20px;
+  gap: 10px;
 }
 
 .colorbox{
   height: 20px;
   width: 20px;
+}
+
+.trash{
+  height: 20px;
+  width: 20px;
+}
+
+.detail{
+  height: 20px;
+  border: 1px solid seagreen;
 }

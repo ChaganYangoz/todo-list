@@ -71,6 +71,9 @@ window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+  if (event.target == detailWindow) {
+    detailWindow.style.display = "none";
+  }
 }
 
 
@@ -99,9 +102,28 @@ class MergeToDo {
       }
       box.setAttribute('class','todoBox');
       
+      const detail=document.createElement('div');
+      detail.textContent='Details';
+      detail.setAttribute('class','detail');
+      detail.onclick=this.showDetails;
+
+      const trash=document.createElement('img');
+      trash.setAttribute('class','trash');
+      trash.setAttribute('src','bin.png');
+
       titlebox.textContent=this.title;
       box.appendChild(colorbox);
       box.appendChild(titlebox);
+      box.appendChild(detail);
+      box.appendChild(trash);
       todoBar.appendChild(box);
+  }
+
+  showDetails(){
+    const detailWindow=document.querySelector('#detailWindow');
+    detailWindow.style.display = "block";
+
+    console.log('a '+this.title);
+
   }
 }

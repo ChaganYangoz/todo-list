@@ -1,35 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Todo List</title>
 </head>
+
 <body>
     <div id="container"></div>
-<!-- The Modal -->
-<div id="myModal" class="modal">
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <form onsubmit="return false;" method="get" id="form1">
-        <input type="text" name="" id="title" placeholder="Title" >
-        <input type="text" id="desc" placeholder="Details" >
-        <input type="date" id="date">
-        <div>
-        <div>Priority</div>
-        <input type="radio" name="radio" id="rad1" value="low">
-        <label for="rad1">Low</label>
-        <input type="radio" name="radio" id="rad2" value="med">
-        <label for="rad2">Medium</label>
-        <input type="radio" name="radio" id="rad3" value="high">
-        <label for="rad3">High</label></div>
-    </form>
-      <button id="submit" form="form1">Submit</button>
-  </div>
+        <!-- Modal content -->
+        <div class="modal-content">
+            <form onsubmit="return false;" method="get" id="form1">
+                <input type="text" name="" id="title" placeholder="Title">
+                <input type="text" id="desc" placeholder="Details">
+                <input type="date" id="date">
+                <div>
+                    <div>Priority</div>
+                    <input type="radio" name="radio" id="rad1" value="low">
+                    <label for="rad1">Low</label>
+                    <input type="radio" name="radio" id="rad2" value="med">
+                    <label for="rad2">Medium</label>
+                    <input type="radio" name="radio" id="rad3" value="high">
+                    <label for="rad3">High</label>
+                </div>
+            </form>
+            <button id="submit" form="form1">Submit</button>
+        </div>
 
-</div>
+    </div>
+    <div class="modal" id="detailWindow">
+        <div class="modal-content" id="detailContent">
+            <div id="titlebox"></div>
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
+
 </html>

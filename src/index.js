@@ -24,7 +24,7 @@ addTodo.textContent = "+";
 
 const submit = document.querySelector("#submit");
 submit.onclick = sendForm;
-
+let count=0;
 function sendForm() {
 
   let title = document.querySelector("#title").value;
@@ -35,7 +35,7 @@ function sendForm() {
   for (let i = 0; i < ele.length; i++) {
     if (ele[i].checked){
       let mrg=new MergeToDo(title,desc,date,ele[i].value);
-      todos.push(mrg);
+      count++;
       mrg.display();
       ele[i].checked=false;
     }
@@ -116,13 +116,14 @@ class MergeToDo {
         document.querySelector('#datebox').textContent="Date: "+this.date;
 
       }
+      
+      box.setAttribute('id',count);
 
       const trash=document.createElement('img');
       trash.setAttribute('class','trash');
       trash.setAttribute('src','bin.png');
 
       trash.onclick=()=>{
-        Object.r
       }
 
       titlebox.textContent=this.title;

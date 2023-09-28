@@ -35,6 +35,7 @@ function sendForm() {
   for (let i = 0; i < ele.length; i++) {
     if (ele[i].checked){
       let mrg=new MergeToDo(title,desc,date,ele[i].value);
+      todos.push(mrg);
       mrg.display();
       ele[i].checked=false;
     }
@@ -105,11 +106,24 @@ class MergeToDo {
       const detail=document.createElement('div');
       detail.textContent='Details';
       detail.setAttribute('class','detail');
-      detail.onclick=this.showDetails;
+
+      detail.onclick=()=>{
+        const detailWindow=document.querySelector('#detailWindow');
+        detailWindow.style.display = "block";
+    
+        document.querySelector('#titlebox').textContent="Title: "+this.title;
+        document.querySelector('#detailbox').textContent="Details: "+this.desc;
+        document.querySelector('#datebox').textContent="Date: "+this.date;
+
+      }
 
       const trash=document.createElement('img');
       trash.setAttribute('class','trash');
       trash.setAttribute('src','bin.png');
+
+      trash.onclick=()=>{
+        Object.r
+      }
 
       titlebox.textContent=this.title;
       box.appendChild(colorbox);
@@ -118,12 +132,5 @@ class MergeToDo {
       box.appendChild(trash);
       todoBar.appendChild(box);
   }
-
-  showDetails(){
-    const detailWindow=document.querySelector('#detailWindow');
-    detailWindow.style.display = "block";
-
-    console.log('a '+this.title);
-
-  }
+    
 }

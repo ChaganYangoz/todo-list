@@ -24,22 +24,24 @@ addTodo.textContent = "+";
 
 const submit = document.querySelector("#submit");
 submit.onclick = sendForm;
-let count=0;
+
 function sendForm() {
 
   let title = document.querySelector("#title").value;
   let desc = document.querySelector("#desc").value;
   let date = document.querySelector("#date").value;
+  let pri;
   var ele = document.getElementsByName('radio');
 
   for (let i = 0; i < ele.length; i++) {
     if (ele[i].checked){
-      let mrg=new MergeToDo(title,desc,date,ele[i].value);
-      count++;
-      mrg.display();
+      pri=ele[i].value;
       ele[i].checked=false;
     }
   }
+
+  let todo=new Todo(title,desc,pri,date);
+  todo.createBar();
 
   document.querySelector("#title").value = "";
   document.querySelector("#desc").value = "";
@@ -76,62 +78,71 @@ window.onclick = function (event) {
     detailWindow.style.display = "none";
   }
 }
-
-
-class MergeToDo {
-  constructor(title, desc, date, pri) {
-    this.title = title;
-    this.desc = desc;
-    this.date = date;
-    this.pri = pri;
+let count=0;
+class Todo{
+  constructor(title,desc,pri,date){
+    this.title=title;
+    this.desc=desc;
+    this.pri=pri;
+    this.date=date;
   }
 
-  display(){
-      const box=document.createElement('div');
+  createBar(){
+    const todo=document.createElement('div');
+    todo.setAttribute('class','todo');
+    todo.setAttribute('id',count);
+    count++;
 
-      const titlebox=document.createElement('div');
-      const descbox=document.createElement('div');
-      const dateebox=document.createElement('div');
-      const colorbox=document.createElement('div');
-      colorbox.setAttribute('class','colorbox');
-      if(this.pri=='low'){
-        colorbox.style.backgroundColor='green';
-      }else if(this.pri=="med"){
-        colorbox.style.backgroundColor='yellow';
-      }else if(this.pri=='high'){
-        colorbox.style.backgroundColor="red";
-      }
-      box.setAttribute('class','todoBox');
-      
-      const detail=document.createElement('div');
-      detail.textContent='Details';
-      detail.setAttribute('class','detail');
+    const todoTitle=document.createElement('div');
+    const colorBar=document.createElement('div');
+    colorBar.setAttribute('class','colorbox');
+   
+    colorBar.style.backgroundColor=findPriColor(this.pri);
+    todoTitle.textContent=this.title;
 
-      detail.onclick=()=>{
-        const detailWindow=document.querySelector('#detailWindow');
-        detailWindow.style.display = "block";
+    const trash=document.createElement('img');
+    trash.setAttribute('class','trash');
+    trash.setAttribute('src','bin.png');
+
+    todo.appendChild(colorBar);
+    todo.appendChild(todoTitle);
+    todo.appendChild(trash);
+    AddTodo(todo);
     
-        document.querySelector('#titlebox').textContent="Title: "+this.title;
-        document.querySelector('#detailbox').textContent="Details: "+this.desc;
-        document.querySelector('#datebox').textContent="Date: "+this.date;
 
-      }
-      
-      box.setAttribute('id',count);
-
-      const trash=document.createElement('img');
-      trash.setAttribute('class','trash');
-      trash.setAttribute('src','bin.png');
-
-      trash.onclick=()=>{
-      }
-
-      titlebox.textContent=this.title;
-      box.appendChild(colorbox);
-      box.appendChild(titlebox);
-      box.appendChild(detail);
-      box.appendChild(trash);
-      todoBar.appendChild(box);
+    trash.onclick=function(){
+      DeleteTodo(todo.id);
+    };
   }
-    
+}
+
+function AddTodo(todo){
+  todos.push(todo);
+  Update();
+}
+
+function DeleteTodo(todo){
+  for(let i=0;i<todos.length;i++){
+    if(todos[i].id==todo){
+      todos.splice(i, 1);
+    }
+  }
+  Update();
+}
+
+function Update(){
+    todoBar.innerHTML='';
+    for(let i=0;i<todos.length;i++){
+      todoBar.appendChild(todos[i]);
+    }
+}
+
+function findPriColor(pri){
+  if(pri=='low'){
+    return 'green';
+  }else if(pri=='med'){
+    return 'yellow';
+  }else if(pri=="high"){
+    return 'red';
+  }
 }

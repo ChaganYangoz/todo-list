@@ -30,6 +30,7 @@ function sendForm() {
   let title = document.querySelector("#title").value;
   let desc = document.querySelector("#desc").value;
   let date = document.querySelector("#date").value;
+  console.log(date);
   let pri;
   var ele = document.getElementsByName('radio');
 
@@ -65,6 +66,11 @@ function add() {
   modal.style.display = "block";
 
 }
+
+today.onclick=function(){
+  Todaytodo(todos);
+
+};
 
 //Modal
 var modal = document.getElementById("myModal");
@@ -117,6 +123,7 @@ class Todo{
 }
 
 function AddTodo(todo){
+  console.log(todo.date+' '+new Date());
   todos.push(todo);
   Update();
 }

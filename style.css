@@ -90,7 +90,7 @@ form {
   height: 20px;
   border: 1px solid black;
   display: grid;
-  grid-template-columns: 20px 1fr 50px 20px;
+  grid-template-columns: 20px 20px 1fr 50px 20px;
   gap: 10px;
 }
 
@@ -114,4 +114,12 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.done{
+  text-decoration: line-through;
+}
+
+.notdone{
+  text-decoration: none;
 }

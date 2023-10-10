@@ -1,4 +1,6 @@
 import Todaytodo from "./today";
+import HomePage from "./home";
+import WeekToDo from "./week";
 
 const container = document.querySelector("#container");
 const leftbar = document.createElement("div");
@@ -30,9 +32,10 @@ function sendForm() {
   let title = document.querySelector("#title").value;
   let desc = document.querySelector("#desc").value;
   let date = document.querySelector("#date").value;
-  console.log(date);
   let pri;
   var ele = document.getElementsByName('radio');
+
+  const todoContainer=document.createElement('div');
 
   for (let i = 0; i < ele.length; i++) {
     if (ele[i].checked){
@@ -41,8 +44,9 @@ function sendForm() {
     }
   }
 
-  let todo=new Todo(title,desc,pri,date);
+  let todo=new Todo(title,desc,pri,date,todoContainer);
   todo.createBar();
+  AddTodo(todo);
 
   document.querySelector("#title").value = "";
   document.querySelector("#desc").value = "";
@@ -72,6 +76,14 @@ today.onclick=function(){
 
 };
 
+home.onclick=function(){
+  HomePage(todos);
+};
+
+Week.onclick=function(){
+  WeekToDo(todos);
+}
+
 //Modal
 var modal = document.getElementById("myModal");
 
@@ -84,24 +96,44 @@ window.onclick = function (event) {
     detailWindow.style.display = "none";
   }
 }
+
 let count=0;
+
 class Todo{
-  constructor(title,desc,pri,date){
+  constructor(title,desc,pri,date,todoContainer){
     this.title=title;
     this.desc=desc;
     this.pri=pri;
     this.date=date;
+    this.todoContainer=todoContainer;
   }
 
   createBar(){
-    const todo=document.createElement('div');
-    todo.setAttribute('class','todo');
-    todo.setAttribute('id',count);
+    this.todoContainer.setAttribute('class','todo');
+    this.todoContainer.setAttribute('id',count);
     count++;
 
     const todoTitle=document.createElement('div');
     const colorBar=document.createElement('div');
+    const detail=document.createElement('div');
+
+    detail.innerText='Details';
+    detail.setAttribute('class','detail');
     colorBar.setAttribute('class','colorbox');
+
+    var done = document.createElement("INPUT");
+    done.setAttribute("type", "checkbox");
+    
+    done.onclick=()=>{
+      if(done.checked){
+        todoTitle.classList.remove('notdone');
+        todoTitle.classList.add('done');
+      }else{
+        todoTitle.classList.remove('done');
+        todoTitle.classList.add('notdone');
+      }
+    }
+    
    
     colorBar.style.backgroundColor=findPriColor(this.pri);
     todoTitle.textContent=this.title;
@@ -110,37 +142,48 @@ class Todo{
     trash.setAttribute('class','trash');
     trash.setAttribute('src','bin.png');
 
-    todo.appendChild(colorBar);
-    todo.appendChild(todoTitle);
-    todo.appendChild(trash);
-    AddTodo(todo);
+    this.todoContainer.appendChild(colorBar);
+    this.todoContainer.appendChild(done);
+    this.todoContainer.appendChild(todoTitle);
+    this.todoContainer.appendChild(detail);
+    this.todoContainer.appendChild(trash);
     
+    detail.onclick=()=>{
+      detailWindow.style.display = "block";
+      const titlebox=document.querySelector('#titlebox');
+      titlebox.innerText="Title: "+this.title;
 
-    trash.onclick=function(){
-      DeleteTodo(todo.id);
+      const detailbox=document.querySelector("#detailbox");
+      detailbox.innerText="Detail: "+this.desc;
+
+      const datebox=document.querySelector('#datebox');
+      datebox.innerText="Date: "+this.date;
     };
-  }
+
+    trash.onclick=()=>{
+      Delete(this.todoContainer);
+    };
+  }   
+}
+
+function Delete(todoContainer){
+    todoContainer.remove();
+    for(let i=0;i<todos.length;i++){
+      if(todos[i].todoContainer.id==todoContainer.id){
+        todos.splice(i,1);
+      }
+    }
 }
 
 function AddTodo(todo){
-  console.log(todo.date+' '+new Date());
   todos.push(todo);
-  Update();
-}
-
-function DeleteTodo(todo){
-  for(let i=0;i<todos.length;i++){
-    if(todos[i].id==todo){
-      todos.splice(i, 1);
-    }
-  }
   Update();
 }
 
 function Update(){
     todoBar.innerHTML='';
     for(let i=0;i<todos.length;i++){
-      todoBar.appendChild(todos[i]);
+      todoBar.appendChild(todos[i].todoContainer);
     }
 }
 

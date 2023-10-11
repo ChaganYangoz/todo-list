@@ -12,6 +12,10 @@ todoBar.setAttribute('id', 'todoBar');
 container.appendChild(leftbar);
 container.appendChild(todoBar);
 
+const TodoHeader=document.createElement('div');
+TodoHeader.textContent='To-Do List';
+TodoHeader.setAttribute('id','todoheader');
+
 const home = document.createElement("div");
 home.textContent = "Home";
 
@@ -44,18 +48,24 @@ function sendForm() {
     }
   }
 
-  let todo=new Todo(title,desc,pri,date,todoContainer);
-  todo.createBar();
-  AddTodo(todo);
-
-  document.querySelector("#title").value = "";
-  document.querySelector("#desc").value = "";
-  document.querySelector("#date").value = "";
-
-  modal.style.display = "none";
+  if(title=='' || desc=='' || date=="" || ele.value==''){
+    title.setCustomValidity("Please fill out this field");
+  }else{
+    let todo=new Todo(title,desc,pri,date,todoContainer);
+    todo.createBar();
+    AddTodo(todo);
+  
+    document.querySelector("#title").value = "";
+    document.querySelector("#desc").value = "";
+    document.querySelector("#date").value = "";
+  
+    modal.style.display = "none";
+  }
+ 
 
 }
 
+leftbar.appendChild(TodoHeader);
 leftbar.appendChild(home);
 leftbar.appendChild(today);
 leftbar.appendChild(Week);
@@ -117,7 +127,7 @@ class Todo{
     const colorBar=document.createElement('div');
     const detail=document.createElement('div');
 
-    detail.innerText='Details';
+    detail.innerText='Detail';
     detail.setAttribute('class','detail');
     colorBar.setAttribute('class','colorbox');
 

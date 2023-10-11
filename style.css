@@ -1,21 +1,25 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'SavateRegular';
+   font-weight: normal;
+   font-style: normal;
 }
 
 body {
   overflow-x: hidden;
   display: flex;
+  background-color: #4D4C7D;
+  justify-content: center;
 }
 
 #container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 200px;
   margin-top: 200px;
   height: 500px;
-  gap: 100px;
+  border: 3px solid #363062;
 }
 
 .modal {
@@ -25,7 +29,7 @@ body {
   /* Stay in place */
   z-index: 1;
   /* Sit on top */
-  padding-top: 100px;
+  padding-top: 300px;
   /* Location of the box */
   left: 0;
   top: 0;
@@ -45,34 +49,41 @@ body {
 /* Modal Content */
 .modal-content {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 40%;
+  gap: 10px;
 }
 
 #myBtn {
   display: flex;
-  background-color: aqua;
+  background-color: #F99417;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   align-content: center;
   justify-content: center;
   align-items: center;
+
 }
 
 form {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 #leftbar {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
 }
 
 #todoBar{
@@ -81,8 +92,8 @@ form {
   align-items: start;
   min-height: 500px;
   width: 1200px;
-  border: 1px solid black;
   gap: 5px;
+  background-color: #F5F5F5;
 }
 
 .todo{
@@ -92,21 +103,26 @@ form {
   display: grid;
   grid-template-columns: 20px 20px 1fr 50px 20px;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .colorbox{
-  height: 20px;
+  height: 100%;
   width: 20px;
 }
 
 .trash{
   height: 20px;
   width: 20px;
+  margin-right: 5px;
 }
 
 .detail{
   height: 20px;
-  border: 1px solid seagreen;
+  background-color: #4D4C7D;
+  border-radius: 6%;
+  color: #F5F5F5;
 }
 
 #detailContent{
@@ -122,4 +138,19 @@ form {
 
 .notdone{
   text-decoration: none;
+}
+
+input{
+  padding: 10px;
+}
+
+#submit{
+  padding: 10px;
+  background-color: #888;
+  width: 200px;
+}
+
+#todoheader{
+  font-size: 25px;
+  font-weight: 600;
 }

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/savate" type="text/css"/>
     <title>Todo List</title>
 </head>
 
@@ -16,16 +17,16 @@
         <!-- Modal content -->
         <div class="modal-content">
             <form onsubmit="return false;" method="get" id="form1">
-                <input type="text" name="" id="title" placeholder="Title">
-                <input type="text" id="desc" placeholder="Details">
-                <input type="date" id="date">
+                <input type="text" name="" id="title" placeholder="Title" required>
+                <input type="text" id="desc" placeholder="Details" required>
+                <input type="date" id="date" required>
                 <div>
-                    <div>Priority</div>
-                    <input type="radio" name="radio" id="rad1" value="low">
+                    <div>Priority:</div>
+                    <input type="radio" name="radio" id="rad1" value="low" >
                     <label for="rad1">Low</label>
-                    <input type="radio" name="radio" id="rad2" value="med">
+                    <input type="radio" name="radio" id="rad2" value="med" >
                     <label for="rad2">Medium</label>
-                    <input type="radio" name="radio" id="rad3" value="high">
+                    <input type="radio" name="radio" id="rad3" value="high" required>
                     <label for="rad3">High</label>
                 </div>
             </form>
